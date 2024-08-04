@@ -27,6 +27,8 @@ func Login(ctx *gin.Context) {
 	}
 
 	logger.Logger.Info("request body:", zap.String("user:", loginRequest.Username), zap.String("pass:", loginRequest.Password))
+
+
 }
 
 // Register
