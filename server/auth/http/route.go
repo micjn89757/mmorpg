@@ -8,7 +8,7 @@ import (
 
 func initRouter(middleware ...gin.HandlerFunc) *gin.Engine {
 	// gin.SetMode(gin.ReleaseMode)
-	gin.DefaultWriter = io.Discard
+	gin.DefaultWriter = io.Discard	// 禁用gin的默认输出
 
 	// 设置新人网络 []string
 	r := gin.New()

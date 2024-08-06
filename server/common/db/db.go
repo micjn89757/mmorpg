@@ -5,10 +5,10 @@ import (
 	"server/common"
 	"sync"
 
+	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"github.com/redis/go-redis/v9"
 )
 
 // 鉴权服务器需要使用redis
@@ -23,7 +23,7 @@ var (
 func createMMODBConnection(dbname, host, user, password string, port int) *gorm.DB {
 	// data source name user:password@tcp(host:port)/dbname?charset=utf8mb4&parseTime=True&loc=local 
 
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=local", user, password, host, port, dbname)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True", user, password, host, port, dbname)
 	
 	var err error 
 	db, err := gorm.Open(mysql.New(mysql.Config{
@@ -51,18 +51,20 @@ func createMMODBConnection(dbname, host, user, password string, port int) *gorm.
 	return db
 }
 
-func GetMMODBConnection() {
+func GetMMODBConnection() *gorm.DB {
 	mmodbOnce.Do(func() {
 		if mmodb == nil {
-			dbName := "mmo"
+			dbName := "mmodb"
 			viper := common.CreateConfig("mysql")
 			host := viper.GetString(dbName + ".host")
 			port := viper.GetInt(dbName + ".port")
-			user := viper.GetString(dbName + ".user")
+			user := viper.GetString(dbName + ".username")
 			password := viper.GetString(dbName + ".password")
 			mmodb = createMMODBConnection(dbName, host, user, password, port)
 		}
 	})
+
+	return mmodb
 }
 
 
@@ -80,8 +82,9 @@ func GetRedisClient() *redis.Client {
 	mmoRedisOnce.Do(func() {
 		if mmoRedis == nil {
 			viper := common.CreateConfig("redis")
-			addr := viper.GetString("addr")
-			pass := viper.GetString("password") // 没设置该配置项时，viper会默认赋零值，不会报错
+			dbName := "redis"
+			addr := viper.GetString(dbName + ".addr")
+			pass := viper.GetString(dbName + ".password") // 没设置该配置项时，viper会默认赋零值，不会报错
 			db := viper.GetInt("db")
 			mmoRedis = createRedisClient(addr, pass, db)
 		}

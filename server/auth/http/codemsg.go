@@ -9,6 +9,7 @@ const (
 	SqlError 
 	AccountExist 
 	UsernameOrPasswordError
+	TokenGenError
 )
 
 
@@ -19,6 +20,7 @@ var codemsg = map[code]string{
 	SqlError: "数据库异常",
 	AccountExist: "账号已存在",
 	UsernameOrPasswordError: "账号或密码错误",
+	TokenGenError: "token 生成异常",
 }
 
 
