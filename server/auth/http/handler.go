@@ -56,7 +56,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	// 生成一个uuid
+	// 生成一个uuid（用户的唯一标识）
 	token, err := uuid.NewV7()
 	if err != nil {
 		logger.Logger.Error("uuid get failed", zap.Error(err))
@@ -67,7 +67,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	// token 存入redis
+	// token和对应的账号信息 存入redis
 	err = db.SetToken(token, request.Account)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, Response{
@@ -77,6 +77,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
+	// 将生成的token返回给客户端
 	ctx.JSON(http.StatusOK, Response{
 		Code: LoginSuccess,
 		Msg: GetCodeMsg(LoginSuccess),
