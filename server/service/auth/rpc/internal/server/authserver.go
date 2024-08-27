@@ -13,7 +13,6 @@ import (
 /*
 grpc鉴权服务
 */
-
 type Auth struct {
 	auth.UnimplementedAuthServer
 }

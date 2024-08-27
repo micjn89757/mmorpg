@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.34.2
 // 	protoc        v5.27.2
-// source: proto/auth.proto
+// source: auth.proto
 
-package auth
+package service
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -31,7 +31,7 @@ type CheckTokenReq struct {
 func (x *CheckTokenReq) Reset() {
 	*x = CheckTokenReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_auth_proto_msgTypes[0]
+		mi := &file_auth_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -44,7 +44,7 @@ func (x *CheckTokenReq) String() string {
 func (*CheckTokenReq) ProtoMessage() {}
 
 func (x *CheckTokenReq) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_proto_msgTypes[0]
+	mi := &file_auth_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *CheckTokenReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckTokenReq.ProtoReflect.Descriptor instead.
 func (*CheckTokenReq) Descriptor() ([]byte, []int) {
-	return file_proto_auth_proto_rawDescGZIP(), []int{0}
+	return file_auth_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CheckTokenReq) GetToken() string {
@@ -79,7 +79,7 @@ type CheckTokenRes struct {
 func (x *CheckTokenRes) Reset() {
 	*x = CheckTokenRes{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_auth_proto_msgTypes[1]
+		mi := &file_auth_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -92,7 +92,7 @@ func (x *CheckTokenRes) String() string {
 func (*CheckTokenRes) ProtoMessage() {}
 
 func (x *CheckTokenRes) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_proto_msgTypes[1]
+	mi := &file_auth_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -105,7 +105,7 @@ func (x *CheckTokenRes) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckTokenRes.ProtoReflect.Descriptor instead.
 func (*CheckTokenRes) Descriptor() ([]byte, []int) {
-	return file_proto_auth_proto_rawDescGZIP(), []int{1}
+	return file_auth_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CheckTokenRes) GetData() *CheckTokenResData {
@@ -127,13 +127,14 @@ type CheckTokenResData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Account string `protobuf:"bytes,2,opt,name=account,proto3" json:"account,omitempty"`
+	Account string `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
+	Mobile  string `protobuf:"bytes,2,opt,name=mobile,proto3" json:"mobile,omitempty"`
 }
 
 func (x *CheckTokenResData) Reset() {
 	*x = CheckTokenResData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_auth_proto_msgTypes[2]
+		mi := &file_auth_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -146,7 +147,7 @@ func (x *CheckTokenResData) String() string {
 func (*CheckTokenResData) ProtoMessage() {}
 
 func (x *CheckTokenResData) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_auth_proto_msgTypes[2]
+	mi := &file_auth_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +160,7 @@ func (x *CheckTokenResData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckTokenResData.ProtoReflect.Descriptor instead.
 func (*CheckTokenResData) Descriptor() ([]byte, []int) {
-	return file_proto_auth_proto_rawDescGZIP(), []int{2}
+	return file_auth_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CheckTokenResData) GetAccount() string {
@@ -169,52 +170,61 @@ func (x *CheckTokenResData) GetAccount() string {
 	return ""
 }
 
-var File_proto_auth_proto protoreflect.FileDescriptor
+func (x *CheckTokenResData) GetMobile() string {
+	if x != nil {
+		return x.Mobile
+	}
+	return ""
+}
 
-var file_proto_auth_proto_rawDesc = []byte{
-	0x0a, 0x10, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x12, 0x04, 0x61, 0x75, 0x74, 0x68, 0x22, 0x25, 0x0a, 0x0d, 0x43, 0x68, 0x65, 0x63,
-	0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x6b,
-	0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x22,
-	0x61, 0x0a, 0x0d, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73,
-	0x12, 0x2b, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
-	0x2e, 0x61, 0x75, 0x74, 0x68, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
+var File_auth_proto protoreflect.FileDescriptor
+
+var file_auth_proto_rawDesc = []byte{
+	0x0a, 0x0a, 0x61, 0x75, 0x74, 0x68, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x22, 0x25, 0x0a, 0x0d, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f,
+	0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x64, 0x0a, 0x0d,
+	0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x12, 0x2e, 0x0a,
+	0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
 	0x52, 0x65, 0x73, 0x44, 0x61, 0x74, 0x61, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x19, 0x0a,
 	0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05,
 	0x65, 0x72, 0x72, 0x6f, 0x72, 0x88, 0x01, 0x01, 0x42, 0x08, 0x0a, 0x06, 0x5f, 0x65, 0x72, 0x72,
-	0x6f, 0x72, 0x22, 0x2d, 0x0a, 0x11, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
+	0x6f, 0x72, 0x22, 0x45, 0x0a, 0x11, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
 	0x52, 0x65, 0x73, 0x44, 0x61, 0x74, 0x61, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x32, 0x3e, 0x0a, 0x04, 0x41, 0x75, 0x74, 0x68, 0x12, 0x36, 0x0a, 0x0a, 0x63, 0x68, 0x65,
-	0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x13, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x2e, 0x43,
-	0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x13, 0x2e, 0x61,
-	0x75, 0x74, 0x68, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65,
-	0x73, 0x42, 0x07, 0x5a, 0x05, 0x2f, 0x61, 0x75, 0x74, 0x68, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x12, 0x16, 0x0a, 0x06, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x32, 0x44, 0x0a, 0x04, 0x41, 0x75, 0x74,
+	0x68, 0x12, 0x3c, 0x0a, 0x0a, 0x63, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12,
+	0x16, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54,
+	0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x42,
+	0x0b, 0x5a, 0x09, 0x2e, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_proto_auth_proto_rawDescOnce sync.Once
-	file_proto_auth_proto_rawDescData = file_proto_auth_proto_rawDesc
+	file_auth_proto_rawDescOnce sync.Once
+	file_auth_proto_rawDescData = file_auth_proto_rawDesc
 )
 
-func file_proto_auth_proto_rawDescGZIP() []byte {
-	file_proto_auth_proto_rawDescOnce.Do(func() {
-		file_proto_auth_proto_rawDescData = protoimpl.X.CompressGZIP(file_proto_auth_proto_rawDescData)
+func file_auth_proto_rawDescGZIP() []byte {
+	file_auth_proto_rawDescOnce.Do(func() {
+		file_auth_proto_rawDescData = protoimpl.X.CompressGZIP(file_auth_proto_rawDescData)
 	})
-	return file_proto_auth_proto_rawDescData
+	return file_auth_proto_rawDescData
 }
 
-var file_proto_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_proto_auth_proto_goTypes = []any{
-	(*CheckTokenReq)(nil),     // 0: auth.CheckTokenReq
-	(*CheckTokenRes)(nil),     // 1: auth.CheckTokenRes
-	(*CheckTokenResData)(nil), // 2: auth.CheckTokenResData
+var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_auth_proto_goTypes = []any{
+	(*CheckTokenReq)(nil),     // 0: service.CheckTokenReq
+	(*CheckTokenRes)(nil),     // 1: service.CheckTokenRes
+	(*CheckTokenResData)(nil), // 2: service.CheckTokenResData
 }
-var file_proto_auth_proto_depIdxs = []int32{
-	2, // 0: auth.CheckTokenRes.data:type_name -> auth.CheckTokenResData
-	0, // 1: auth.Auth.checkToken:input_type -> auth.CheckTokenReq
-	1, // 2: auth.Auth.checkToken:output_type -> auth.CheckTokenRes
+var file_auth_proto_depIdxs = []int32{
+	2, // 0: service.CheckTokenRes.data:type_name -> service.CheckTokenResData
+	0, // 1: service.Auth.checkToken:input_type -> service.CheckTokenReq
+	1, // 2: service.Auth.checkToken:output_type -> service.CheckTokenRes
 	2, // [2:3] is the sub-list for method output_type
 	1, // [1:2] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -222,13 +232,13 @@ var file_proto_auth_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_proto_auth_proto_init() }
-func file_proto_auth_proto_init() {
-	if File_proto_auth_proto != nil {
+func init() { file_auth_proto_init() }
+func file_auth_proto_init() {
+	if File_auth_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_proto_auth_proto_msgTypes[0].Exporter = func(v any, i int) any {
+		file_auth_proto_msgTypes[0].Exporter = func(v any, i int) any {
 			switch v := v.(*CheckTokenReq); i {
 			case 0:
 				return &v.state
@@ -240,7 +250,7 @@ func file_proto_auth_proto_init() {
 				return nil
 			}
 		}
-		file_proto_auth_proto_msgTypes[1].Exporter = func(v any, i int) any {
+		file_auth_proto_msgTypes[1].Exporter = func(v any, i int) any {
 			switch v := v.(*CheckTokenRes); i {
 			case 0:
 				return &v.state
@@ -252,7 +262,7 @@ func file_proto_auth_proto_init() {
 				return nil
 			}
 		}
-		file_proto_auth_proto_msgTypes[2].Exporter = func(v any, i int) any {
+		file_auth_proto_msgTypes[2].Exporter = func(v any, i int) any {
 			switch v := v.(*CheckTokenResData); i {
 			case 0:
 				return &v.state
@@ -265,23 +275,23 @@ func file_proto_auth_proto_init() {
 			}
 		}
 	}
-	file_proto_auth_proto_msgTypes[1].OneofWrappers = []any{}
+	file_auth_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_proto_auth_proto_rawDesc,
+			RawDescriptor: file_auth_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_auth_proto_goTypes,
-		DependencyIndexes: file_proto_auth_proto_depIdxs,
-		MessageInfos:      file_proto_auth_proto_msgTypes,
+		GoTypes:           file_auth_proto_goTypes,
+		DependencyIndexes: file_auth_proto_depIdxs,
+		MessageInfos:      file_auth_proto_msgTypes,
 	}.Build()
-	File_proto_auth_proto = out.File
-	file_proto_auth_proto_rawDesc = nil
-	file_proto_auth_proto_goTypes = nil
-	file_proto_auth_proto_depIdxs = nil
+	File_auth_proto = out.File
+	file_auth_proto_rawDesc = nil
+	file_auth_proto_goTypes = nil
+	file_auth_proto_depIdxs = nil
 }

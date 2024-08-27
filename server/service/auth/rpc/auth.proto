@@ -1,8 +1,9 @@
 syntax = "proto3";
 
-option go_package = "/auth";
+package service;
 
-package auth;
+option go_package="./service";
+
 
 // Auth服务
 service Auth {
@@ -19,5 +20,6 @@ message CheckTokenRes {
 }
 
 message CheckTokenResData {
-    string account = 2;
+    string account = 1;
+    string mobile = 2;
 }

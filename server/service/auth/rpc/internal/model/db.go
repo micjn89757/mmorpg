@@ -11,7 +11,9 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-// 鉴权服务器需要使用redis
+/*
+	db连接
+*/
 var (
 	mmodb 			*gorm.DB
 	mmodbOnce  		sync.Once

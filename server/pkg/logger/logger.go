@@ -3,27 +3,18 @@ package logger
 import (
 	"io"
 	"os"
-	"server/common"
-	"sync"
+	"server/pkg"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
 
-var (
-	Logger 		*zap.Logger
-	loggerOnce 	sync.Once
-)
+func GetLogger(filename string) *zap.Logger {
+	encoder := encoder()
+	writer := writeSync(filename)
+	core := zapcore.NewCore(encoder, writer, zapcore.DebugLevel)
 
-
-func InitLogger(filename string) {
-	loggerOnce.Do(func() {
-		encoder := encoder()
-		writer := writeSync(filename)
-		core := zapcore.NewCore(encoder, writer, zapcore.DebugLevel)
-
-		Logger = zap.New(core)
-	})
+    return zap.New(core)
 }
 
 
@@ -37,7 +28,7 @@ func encoder() zapcore.Encoder {
 
 // 写到哪里
 func writeSync(filename string) zapcore.WriteSyncer {
-	file, err := os.OpenFile(common.ProjectRootPath + "/log/" + filename, os.O_CREATE | os.O_RDWR | os.O_APPEND, 0666)
+	file, err := os.OpenFile(pkg.ProjectRootPath + "/log/" + filename, os.O_CREATE | os.O_RDWR | os.O_APPEND, 0666)
 	if err != nil {
 		panic("file not exist")
 	}
